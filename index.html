@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IN BUDGET - Best Deals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+        }
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .category {
+            margin-bottom: 20px;
+        }
+        .category h2 {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+        .deals {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .deal {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            width: 30%;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+        .deal img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .deal a {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        .hide {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+<header>IN BUDGET - Best Deals</header>
+
+<div class="container">
+    <!-- Search Bar -->
+    <input type="text" id="searchInput" class="search-box" placeholder="Search deals..." onkeyup="searchDeals()">
+
+    <!-- Home Appliances -->
+    <div class="category">
+        <h2>Home Appliances</h2>
+        <div class="deals">
+            <div class="deal">
+                <img src="https://m.media-amazon.com/images/I/81NH5WzMlDL._SL1500_.jpg" alt="Philips Air Fryer">
+                <p class="product-name"><strong>Philips Air Fryer (1400W, 4.1L)</strong></p>
+                <p>₹9,999 <del>₹13,995</del></p>
+                <a href="https://www.amazon.in/dp/B08FXRSR7T" target="_blank">Buy Now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fashion -->
+    <div class="category">
+        <h2>Fashion</h2>
+        <div class="deals">
+            <div class="deal">
+                <img src="https://m.media-amazon.com/images/I/71l7iNwhvDL._SL1500_.jpg" alt="Nike Sneakers">
+                <p class="product-name"><strong>Nike Men's Sneaker (Black, Size 9)</strong></p>
+                <p>₹3,999 <del>₹5,995</del></p>
+                <a href="https://www.amazon.in/dp/B09NV9N47G" target="_blank">Buy Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function searchDeals() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let deals = document.querySelectorAll(".deal");
+        let categories = document.querySelectorAll(".category");
+
+        let anyVisible = false;
+
+        deals.forEach(deal => {
+            let productName = deal.querySelector(".product-name").innerText.toLowerCase();
+            if (productName.includes(input)) {
+                deal.classList.remove("hide");
+                anyVisible = true;
+            } else {
+                deal.classList.add("hide");
+            }
+        });
+
+        categories.forEach(category => {
+            let hasVisibleDeals = Array.from(category.querySelectorAll(".deal")).some(deal => !deal.classList.contains("hide"));
+            if (hasVisibleDeals) {
+                category.style.display = "block";
+            } else {
+                category.style.display = "none";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
